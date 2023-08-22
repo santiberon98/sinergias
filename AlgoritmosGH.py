@@ -252,18 +252,17 @@ class Algoritmos:
             
         for i in sujetoSujetoNoPatologico.EMGs:
             #if sujetoSujetoNoPatologico.Id!="SujetoNoPatologico2":
-            EMG.append(i)
-        
-        for lst in EMG:
-            for j in range(len(lst)):
-                if lst[j] < 0:
-                    lst[j] = abs(lst[j])
+            EMG.append(i)        
         
         for idx, lst in enumerate(EMG):
             lst_norm = Algoritmos.SujetoNoPatologicoize_list(lst) # SujetoNoPatologicoizar la señal
             lst_env = Algoritmos().calcularEnvolvente(lst_norm, 2000) # calcular la envolvente de la señal
             EMG[idx] = lst_env # reemplazar la lista original con la lista interpolada y SujetoNoPatologicoizada
-        
+
+        for lst in EMG:
+            for j in range(len(lst)):
+                if lst[j] < 0:
+                    lst[j] = abs(lst[j])
         
         for idx, lst in enumerate(EMG_recortado):
             x = np.linspace(0, len(lst) * 1 / 2000, 100)
